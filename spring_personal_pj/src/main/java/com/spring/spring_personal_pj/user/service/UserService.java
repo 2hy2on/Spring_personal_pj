@@ -5,6 +5,7 @@
 
 package com.spring.spring_personal_pj.user.service;
 
+import com.spring.spring_personal_pj.user.dto.NewPwDto;
 import com.spring.spring_personal_pj.user.dto.UserDto;
 import com.spring.spring_personal_pj.user.entity.UserEntity;
 import com.spring.spring_personal_pj.user.repository.UserRepository;
@@ -45,5 +46,21 @@ public class UserService {
         } else {
             return false;
         }
+    }
+
+    public UserDto updatePassword(NewPwDto newPwDto){
+        UserEntity existingUser = (UserEntity)this.userRepository.findByEmail(newPwDto.getEmail()).orElse(
+            (UserEntity) null);
+
+        if(existingUser != null){
+            if(existingUser.getPassword().equals(newPwDto.getPw())) {
+                existingUser.setPassword(newPwDto.getNewPw());
+                userRepository.save(existingUser);
+
+                return new UserDto(existingUser.getEmail(), existingUser.getPhone(),
+                    existingUser.getName(), existingUser.getPassword(), existingUser.getBirth());
+            }
+        }
+        return null;
     }
 }

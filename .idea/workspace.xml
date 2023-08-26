@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3b5f0bbb-7f87-4306-854e-d9bde2b352d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/controller/ProfileController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/dto/NewPwDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/dto/ProfileDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/entity/ProfileEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/SpringPersonalPjApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/SpringPersonalPjApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/resources/application.properties" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2UEzcLLo9rdPo0w756WGw7r1Alm" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3b5f0bbb-7f87-4306-854e-d9bde2b352d2" name="Changes" comment="" />
+      <created>1692519606080</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1692519606080</updated>
+    </task>
+    <servers />
+  </component>
+</project>

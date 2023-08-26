@@ -7,22 +7,40 @@ package com.spring.spring_personal_pj.user.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.lang.reflect.Member;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.apache.catalina.User;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(
     name = "user"
 )
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class) // Auditing 적용
 public class UserEntity {
     @Id
     @GeneratedValue(
-        strategy = GenerationType.IDENTITY
+        strategy = GenerationType.AUTO
     )
     @Column(
         name = "user_id"
@@ -31,7 +49,13 @@ public class UserEntity {
     @Column(
         name = "email"
     )
+
     private String email;
+    @Column(
+        name = "id"
+    )
+    private String id;
+
     @Column(
         name = "phone"
     )
@@ -59,6 +83,14 @@ public class UserEntity {
     @LastModifiedDate
     private Date updated_date;
 
+    @OneToMany(mappedBy = "user")
+    private List<FriendEntity> friendList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+   // @JoinColumn(name = "user")
+    private List<ProfileEntity> profiles = new ArrayList<>();
+
+    @Builder
     public UserEntity(String email, String phone, String name, String password, Date birth) {
         this.email = email;
         this.phone = phone;
@@ -67,118 +99,4 @@ public class UserEntity {
         this.birth = birth;
     }
 
-    public static UserEntityBuilder builder() {
-        return new UserEntityBuilder();
-    }
-
-    public Long getUserId() {
-        return this.userId;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public String getPhone() {
-        return this.phone;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public Date getBirth() {
-        return this.birth;
-    }
-
-    public Date getCreate_date() {
-        return this.create_date;
-    }
-
-    public Date getUpdated_date() {
-        return this.updated_date;
-    }
-
-    public void setUserId(final Long userId) {
-        this.userId = userId;
-    }
-
-    public void setEmail(final String email) {
-        this.email = email;
-    }
-
-    public void setPhone(final String phone) {
-        this.phone = phone;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public void setPassword(final String password) {
-        this.password = password;
-    }
-
-    public void setBirth(final Date birth) {
-        this.birth = birth;
-    }
-
-    public void setCreate_date(final Date create_date) {
-        this.create_date = create_date;
-    }
-
-    public void setUpdated_date(final Date updated_date) {
-        this.updated_date = updated_date;
-    }
-
-    public UserEntity() {
-    }
-
-    public static class UserEntityBuilder {
-        private String email;
-        private String phone;
-        private String name;
-        private String password;
-        private Date birth;
-
-        UserEntityBuilder() {
-        }
-
-        public UserEntityBuilder email(final String email) {
-            this.email = email;
-            return this;
-        }
-
-        public UserEntityBuilder phone(final String phone) {
-            this.phone = phone;
-            return this;
-        }
-
-        public UserEntityBuilder name(final String name) {
-            this.name = name;
-            return this;
-        }
-
-        public UserEntityBuilder password(final String password) {
-            this.password = password;
-            return this;
-        }
-
-        public UserEntityBuilder birth(final Date birth) {
-            this.birth = birth;
-            return this;
-        }
-
-        public UserEntity build() {
-            return new UserEntity(this.email, this.phone, this.name, this.password, this.birth);
-        }
-
-        public String toString() {
-            return "UserEntity.UserEntityBuilder(email=" + this.email + ", phone=" + this.phone + ", name=" + this.name + ", password=" + this.password + ", birth=" + this.birth + ")";
-        }
-    }
 }
