@@ -8,7 +8,10 @@ package com.spring.spring_personal_pj.user.controller;
 import com.spring.spring_personal_pj.user.dto.NewPwDto;
 import com.spring.spring_personal_pj.user.dto.UserDto;
 import com.spring.spring_personal_pj.user.service.UserService;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -36,8 +39,10 @@ public class UserController {
     //개인정보 조회
     @GetMapping({"/users/info/{userId}"})
     @ResponseBody
-    public UserDto getUser(@PathVariable("userId") Long userId) {
-        return this.service.getUserById(userId);
+    public ResponseEntity<Map<String, Object>> getUser(@PathVariable("userId") Long userId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", this.service.getUserById(userId));
+        return  new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     //개인정보 수정

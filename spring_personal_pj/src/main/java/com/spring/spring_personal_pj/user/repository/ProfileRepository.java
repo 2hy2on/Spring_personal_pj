@@ -1,6 +1,7 @@
 package com.spring.spring_personal_pj.user.repository;
 
 import com.spring.spring_personal_pj.user.entity.ProfileEntity;
+import com.spring.spring_personal_pj.user.entity.ProfileImageEntity;
 import com.spring.spring_personal_pj.user.entity.UserEntity;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +26,7 @@ public interface ProfileRepository extends JpaRepository<ProfileEntity, Long> {
     @Override
     void deleteById(Long aLong);
 
-    @Query("SELECT p FROM ProfileEntity p WHERE p.user.id = :userId")
-    List<ProfileEntity> findAllByUserId(Long userId);
+    @Query(value = "SELECT * FROM profile WHERE user_id = :userId", nativeQuery = true) //user는 db에 있는 값, 엔티티가 아님
+    List<ProfileEntity> getAllByUserId(@Param("userId") long userId); //쿼리문안에 들어감!!!!
 
 }

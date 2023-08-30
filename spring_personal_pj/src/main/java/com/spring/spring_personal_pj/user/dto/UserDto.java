@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor // 모든 필드를 갖는 생성자 추가
 
 public class UserDto {
+
     private String email;
     private String phone;
     private String name;

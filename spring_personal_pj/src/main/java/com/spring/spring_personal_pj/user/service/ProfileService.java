@@ -1,8 +1,12 @@
 package com.spring.spring_personal_pj.user.service;
 
 import com.spring.spring_personal_pj.user.dto.ProfileDto;
+import com.spring.spring_personal_pj.user.entity.BgImageEntity;
 import com.spring.spring_personal_pj.user.entity.ProfileEntity;
+import com.spring.spring_personal_pj.user.entity.ProfileImageEntity;
 import com.spring.spring_personal_pj.user.entity.UserEntity;
+import com.spring.spring_personal_pj.user.repository.ProfileBgRepository;
+import com.spring.spring_personal_pj.user.repository.ProfileImageRepository;
 import com.spring.spring_personal_pj.user.repository.ProfileRepository;
 import com.spring.spring_personal_pj.user.repository.UserRepository;
 import java.util.ArrayList;
@@ -18,6 +22,10 @@ public class ProfileService {
     private ProfileRepository profileRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ProfileImageRepository profileImageRepository;
+    @Autowired
+    private ProfileBgRepository profileBgRepository;
 
     //프로필 생성
     public ProfileDto save(Long userId, ProfileDto profileDto){
@@ -42,12 +50,15 @@ public class ProfileService {
         throw new RuntimeException("User with Id" + userId+"not fund");
     }
     //프로필 조회
+
     public ProfileDto getProfileById(Long id){
         Optional<ProfileEntity> profileEntity = profileRepository.findById(id);
         if(profileEntity.isPresent()){
             ProfileEntity profileExisting = profileEntity.get();
-            System.out.println("getProfileByid================"+ profileExisting.getUser().getUserId());
-            return new ProfileDto(profileExisting);
+            ProfileImageEntity profileImg = profileImageRepository.getCurrentImage((long)id);
+            BgImageEntity profileBg = profileBgRepository.getCurrentImage((long)id);
+
+            return new ProfileDto(profileExisting,profileImg, profileBg);
         }
 
         return null;
@@ -78,18 +89,14 @@ public class ProfileService {
         profileRepository.deleteById(id);
     }
 
-    public List<ProfileDto> findAllByUserId(Long userId){
-        List<ProfileEntity> profileListEnt = profileRepository.findAllByUserId(userId);
+    public List<ProfileDto> findAllByUserId(long userId){
+        List<ProfileEntity> profileListEnt = profileRepository.getAllByUserId(userId);
         List<ProfileDto> profileListDto = new ArrayList<>();
         System.out.println("========리스트 돌리기 전");
         for (ProfileEntity profileEntity : profileListEnt) {
             System.out.println("========리스트 돌리기 "+ profileEntity.getProfileId());
-            ProfileDto profileDto = new ProfileDto(
-                profileEntity.getNickname(),
-                profileEntity.getStatusMsg(),
-                profileEntity.isMulti(),
-                profileEntity.getProfileQr()
-            );
+            ProfileDto profileDto = new ProfileDto(profileEntity);
+
             profileListDto.add(profileDto);
         }
 

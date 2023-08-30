@@ -7,8 +7,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,9 +53,14 @@ public class ProfileEntity {
     private String profileQr;
 
    @ManyToOne
-  @JoinColumn(name = "User_user_id")
+  @JoinColumn(name = "user_id")
     private UserEntity user;
 
+   @OneToMany(mappedBy = "profile")
+   private List<ProfileImageEntity> profileImgs = new ArrayList<>();
+
+   @OneToMany(mappedBy = "profile")
+   private List<BgImageEntity> bgImgs = new ArrayList<>();
 
    public void setUser(UserEntity user){
        this.user =  user;

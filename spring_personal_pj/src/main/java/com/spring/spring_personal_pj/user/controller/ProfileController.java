@@ -28,7 +28,7 @@ public class ProfileController {
         return profileService.save(profile.getUserId(), profile);
     }
 
-    //프로필 부분 조회
+    //프로필 부분 조회, 클릭 시 image가 current에 해당하는 이미지가 나와야함
     @ResponseBody
     @GetMapping("/users/profiles/{profileId}")
     public ProfileDto getProfile(@PathVariable("profileId") Long id){
@@ -39,7 +39,7 @@ public class ProfileController {
     //프로필 전체 조회
     @ResponseBody
     @GetMapping("/users/profile-lists/{userId}")
-    public List<ProfileDto> getAllProfile(@PathVariable("userId") Long userId){
+    public List<ProfileDto> getAllProfile(@PathVariable("userId") long userId){
         return profileService.findAllByUserId(userId);
    }
 
@@ -51,6 +51,7 @@ public class ProfileController {
     }
 
     //프로필 삭제
+    //fk떄문에 delete안됨
     @ResponseBody
     @DeleteMapping("/users/profiles/{profileId}")
     public void deleteProfile(@PathVariable("profileId") Long profileId){
