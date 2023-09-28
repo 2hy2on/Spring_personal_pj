@@ -1,6 +1,7 @@
 package com.spring.spring_personal_pj.user.service;
 
 import com.spring.spring_personal_pj.user.dto.ProfileDto;
+import com.spring.spring_personal_pj.user.dto.ProfileImageDto;
 import com.spring.spring_personal_pj.user.entity.BgImageEntity;
 import com.spring.spring_personal_pj.user.entity.ProfileEntity;
 import com.spring.spring_personal_pj.user.entity.ProfileImageEntity;
@@ -40,10 +41,15 @@ public class ProfileService {
                 .profileQr(profileDto.getProfileQr())
                 .build();
 
-            return new ProfileDto(profileRepository.save(newProfile));
+            ProfileEntity savedProfile = profileRepository.save(newProfile);
 
-            //????
-            //userRepository.save(user.get());
+            ProfileImageEntity newProfImg = new ProfileImageEntity(profileDto.isCurrent(), false, profileDto.getProfileImg(), newProfile);
+            ProfileImageEntity newProfileImg = profileImageRepository.save(newProfImg);
+
+            BgImageEntity newBgImg = new BgImageEntity(profileDto.isBgCurrent(), false, profileDto.getBgImg(), newProfile);
+            BgImageEntity newProfBgImg = profileBgRepository.save(newBgImg);
+
+            return new ProfileDto(newProfile, newProfileImg, newProfBgImg);
 
         }
 
@@ -65,27 +71,27 @@ public class ProfileService {
     }
 
     public ProfileDto updateProfile(Long id, ProfileDto newProfileDto){
-        System.out.println("왜 안받아져와"+newProfileDto.getNickname());
-
         Optional<ProfileEntity> existingProfile = profileRepository.findById(id);
+        //존재하면
         if(existingProfile.isPresent()){
-            ProfileEntity uploadProfile =existingProfile.get();
+            ProfileEntity updateProfile =existingProfile.get();
+            //바꿀 dto 정보를 넣어줌
+            updateProfile.setNickname(newProfileDto.getNickname());
+            updateProfile.setStatusMsg(newProfileDto.getStatusMsg());
+            updateProfile.setMulti(newProfileDto.isMulti());
+            //저장 후
+            profileRepository.save(updateProfile);
 
-            System.out.println("아이디로 찾음"+uploadProfile.getNickname());
-            System.out.println("==============");
-            uploadProfile.setNickname(newProfileDto.getNickname());
-            uploadProfile.setStatusMsg(newProfileDto.getStatusMsg());
-            uploadProfile.setMulti(newProfileDto.isMulti());
-                profileRepository.save(uploadProfile);
-            System.out.println("아이디로 찾음"+uploadProfile.getNickname());
-     //           return new ProfileDto(existingProfile.getProfileId(), existingProfile.getNickname(),
-       //             existingProfile.getStatusMsg(), existingProfile.isMulti(),existingProfile.getProfileQr());
+            return new ProfileDto(updateProfile);
+
             }
         return newProfileDto;
 
     }
 
     public void deleteProfile(Long id){
+//        profileBgRepository.deleteByProfileId(id);
+//        profileImageRepository.deleteByProfileId(id);
         profileRepository.deleteById(id);
     }
 
@@ -104,4 +110,36 @@ public class ProfileService {
 
     }
 
+    public ProfileImageDto saveProfileImage(ProfileImageDto profileImgDto) {
+        ProfileEntity pe = profileRepository.findById(profileImgDto.getProfileId()).get();
+        ProfileImageEntity profileImageEntity = new ProfileImageEntity(pe, profileImgDto);
+        ProfileImageEntity imageEntity = profileImageRepository.save(profileImageEntity);
+
+        return new ProfileImageDto(imageEntity);
+    }
+
+    public String removeProfileImg(Long profileImgId) {
+        profileImageRepository.deleteById(profileImgId);
+        return "삭제했습니다";
+    }
+
+    public ProfileImageDto updateProfileImg(Long profileImgId, ProfileImageDto profileImageDto) {
+        Optional<ProfileImageEntity> existingProfileImg = profileImageRepository.findById(profileImgId);
+        //존재하면
+        if(existingProfileImg.isPresent()){
+            ProfileImageEntity updateProfileImg =existingProfileImg.get();
+            //바꿀 dto 정보를 넣어줌
+            System.out.println("============"+ profileImageDto.isHidden());
+            updateProfileImg.setHidden(profileImageDto.isHidden());
+            updateProfileImg.setCurrent(profileImageDto.isCurrent());
+
+            System.out.println("============"+ updateProfileImg.isHidden());
+            //저장 후
+            ProfileImageEntity newProfileImg = profileImageRepository.save(updateProfileImg);
+
+            return new ProfileImageDto(newProfileImg);
+
+        }
+        return null;
+    }
 }

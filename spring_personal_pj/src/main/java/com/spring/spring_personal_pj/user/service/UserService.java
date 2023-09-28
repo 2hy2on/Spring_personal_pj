@@ -5,10 +5,17 @@
 
 package com.spring.spring_personal_pj.user.service;
 
-import com.spring.spring_personal_pj.user.dto.NewPwDto;
+import static com.spring.spring_personal_pj.exception.base.ErrorCode.CHECK_PASSWORD_SAME;
+import static com.spring.spring_personal_pj.exception.base.ErrorCode.EMAIL_NOT_FOUND;
+import static com.spring.spring_personal_pj.exception.base.ErrorCode.MEMBER_NOT_FOUND;
+
+import com.spring.spring_personal_pj.exception.base.BaseException;
+import com.spring.spring_personal_pj.exception.base.BaseResponse;
+import com.spring.spring_personal_pj.user.dto.UpdatePasswordDto;
 import com.spring.spring_personal_pj.user.dto.UserDto;
 import com.spring.spring_personal_pj.user.entity.UserEntity;
 import com.spring.spring_personal_pj.user.repository.UserRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,20 +28,24 @@ public class UserService {
     }
 
     public UserDto save(UserDto userDto) {
-        UserEntity newUser = this.userRepository.save(userDto.toEntity());
-        return new UserDto(newUser.getEmail(), newUser.getPhone(), newUser.getName(), newUser.getPassword(), newUser.getBirth());
+        UserEntity newUser = userRepository.save(userDto.toEntity());
+        return new UserDto(newUser);
     }
 
     public UserDto getUserById(Long id) {
-        UserEntity userEntity = (UserEntity)this.userRepository.findById(id).orElseThrow(() -> {
-            return new IllegalArgumentException();
-        });
-        return userEntity != null ? new UserDto(userEntity.getEmail(), userEntity.getPhone(), userEntity.getName(), userEntity.getPassword(), userEntity.getBirth()) : null;
+        Optional<UserEntity> userEntity = userRepository.findById(id);
+        if(userEntity.isPresent()){
+            System.out.println("service  통과함");
+            return new UserDto(userEntity.get());
+        }else{
+            System.out.println("service else 통과함");
+            throw new BaseException(MEMBER_NOT_FOUND);
+        }
+
     }
 
     public boolean updateUser(Long userId, UserDto updatedUserDto) {
-        UserEntity existingUser = (UserEntity)this.userRepository.findById(userId).orElse(
-            (UserEntity) null);
+        UserEntity existingUser = userRepository.findById(userId).orElse(null);
         if (existingUser != null) {
             existingUser.setEmail(updatedUserDto.getEmail());
             existingUser.setPhone(updatedUserDto.getPhone());
@@ -42,25 +53,31 @@ public class UserService {
             existingUser.setPassword(updatedUserDto.getPassword());
             existingUser.setBirth(updatedUserDto.getBirth());
             this.userRepository.save(existingUser);
+
             return true;
-        } else {
-            return false;
         }
+        else { //해당 멤버가 없을 때
+            throw new BaseException(MEMBER_NOT_FOUND);
+        }
+
     }
 
-    public UserDto updatePassword(NewPwDto newPwDto){
-        UserEntity existingUser = (UserEntity)this.userRepository.findByEmail(newPwDto.getEmail()).orElse(
-            (UserEntity) null);
+    public UserDto updatePassword(UpdatePasswordDto updatePasswordDto){
+
+        UserEntity existingUser = userRepository.findByEmail(updatePasswordDto.getEmail()).orElse( null);
 
         if(existingUser != null){
-            if(existingUser.getPassword().equals(newPwDto.getPw())) {
-                existingUser.setPassword(newPwDto.getNewPw());
+            if(existingUser.getPassword().equals(updatePasswordDto.getPw())) { //비번이 같으면
+                throw new BaseException(CHECK_PASSWORD_SAME);
+            }
+            else{
+                existingUser.setPassword(updatePasswordDto.getNewPw());
                 userRepository.save(existingUser);
-
-                return new UserDto(existingUser.getEmail(), existingUser.getPhone(),
-                    existingUser.getName(), existingUser.getPassword(), existingUser.getBirth());
+                return new UserDto(existingUser);
             }
         }
-        return null;
+        else{ //없는 이메일 입니다.
+            throw new BaseException(EMAIL_NOT_FOUND);
+        }
     }
 }

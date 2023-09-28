@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.catalina.User;
 
 @Data
 @Builder
@@ -22,6 +23,8 @@ public class UserDto {
     private String password;
     private Date birth;
 
+    private String id;
+
     public UserEntity toEntity(){
         return UserEntity.builder()
             .email(email)
@@ -29,7 +32,17 @@ public class UserDto {
             .name(name)
             .password(password)
             .birth(birth)
+            .id(id)
             .build();
     }
 
+    @Builder
+    public UserDto(UserEntity userEntity){
+        this.email = userEntity.getEmail();
+        this.phone = userEntity.getPhone();
+        this.name = userEntity.getName();
+        this.password = userEntity.getPassword();
+        this.birth = userEntity.getBirth();
+        this.id = userEntity.getId();
+    }
 }

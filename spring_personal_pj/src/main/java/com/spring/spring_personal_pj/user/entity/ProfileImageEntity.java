@@ -1,5 +1,6 @@
 package com.spring.spring_personal_pj.user.entity;
 
+import com.spring.spring_personal_pj.user.dto.ProfileImageDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -10,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +22,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Getter
 @Setter
 @Entity
-@Table(name = "profileimg")
+@Table(name = "profileimage")
 @NoArgsConstructor
 public class ProfileImageEntity {
     @Id
@@ -53,5 +55,22 @@ public class ProfileImageEntity {
     public void setProfile(ProfileEntity profile){
         this.profile =  profile;
         profile.getProfileImgs().add(this);
+    }
+
+    @Builder
+    public ProfileImageEntity(boolean isCurrent, boolean isHidden, String profImg, ProfileEntity p){
+        this.isCurrent = isCurrent;
+        this.isHidden = isHidden;
+        this.profImg = profImg;
+        this.profile = p;
+    }
+
+    @Builder
+    public ProfileImageEntity(ProfileEntity pe, ProfileImageDto p){
+        this.isCurrent = p.isCurrent();
+        this.isHidden = p.isHidden();
+        this.profImg = p.getProfImg();
+        this.profile = pe;
+
     }
 }

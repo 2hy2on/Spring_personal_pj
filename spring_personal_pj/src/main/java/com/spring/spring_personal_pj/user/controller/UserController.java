@@ -5,7 +5,9 @@
 
 package com.spring.spring_personal_pj.user.controller;
 
-import com.spring.spring_personal_pj.user.dto.NewPwDto;
+import com.fasterxml.jackson.databind.ser.Serializers.Base;
+import com.spring.spring_personal_pj.exception.base.BaseResponse;
+import com.spring.spring_personal_pj.user.dto.UpdatePasswordDto;
 import com.spring.spring_personal_pj.user.dto.UserDto;
 import com.spring.spring_personal_pj.user.service.UserService;
 import java.util.HashMap;
@@ -26,35 +28,34 @@ public class UserController {
     @Autowired
     UserService service;
 
-    public UserController() {
-    }
 
     //회원가입
     @PostMapping("/users/signup")
     @ResponseBody
-    public UserDto createUser(@RequestBody UserDto userDto){
-        return service.save(userDto);
+    public BaseResponse<UserDto> addUser(@RequestBody UserDto userDto){
+        UserDto user= service.save(userDto);
+        return BaseResponse.onSuccess(user);
     }
 
     //개인정보 조회
-    @GetMapping({"/users/info/{userId}"})
+    @GetMapping("/users/{userId}")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> getUser(@PathVariable("userId") Long userId) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("data", this.service.getUserById(userId));
-        return  new ResponseEntity<>(map, HttpStatus.OK);
+    public BaseResponse<UserDto> getUser(@PathVariable("userId") Long userId) {
+        UserDto user = service.getUserById(userId);
+        return BaseResponse.onSuccess(user);
     }
 
     //개인정보 수정
     @PatchMapping({"/users/info/{userId}"})
-    public ResponseEntity<String> updateUser(@PathVariable("userId") Long userId, @RequestBody UserDto userDto) {
-        boolean updated = this.service.updateUser(userId, userDto);
-        return updated ? ResponseEntity.ok("User updated successfully") : ResponseEntity.notFound().build();
+    public BaseResponse<String> updateUser(@PathVariable("userId") Long userId, @RequestBody UserDto userDto) {
+        boolean updated = service.updateUser(userId, userDto);
+        return BaseResponse.onSuccess(null);
     }
 
     //비밀번호 변경
    @PatchMapping("/users/password")
-    public UserDto updatePassword(@RequestBody NewPwDto newPwDto){
-        return service.updatePassword(newPwDto);
-   }
+    public BaseResponse<UserDto> updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto){
+        UserDto user = service.updatePassword(updatePasswordDto);
+        return BaseResponse.onSuccess(user);
+    }
 }

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // 기본 생성자 추가
 @AllArgsConstructor // 모든 필드를 갖는 생성자 추가
 @Getter
-public class NewPwDto {
+public class UpdatePasswordDto {
 
     private String email;
     private String pw;

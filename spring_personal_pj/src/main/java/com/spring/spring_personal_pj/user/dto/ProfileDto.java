@@ -12,7 +12,7 @@ import org.hibernate.type.descriptor.jdbc.SmallIntJdbcType;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ProfileDto {
+public class  ProfileDto {
     private Long userId;
 
     private Long profileId;
@@ -48,6 +48,7 @@ public class ProfileDto {
         this.bgImgId = bg.getBgImgId();
         this.bgImg = bg.getBgImage();
         this.isBgCurrent = bg.isCurrent();
+
     }
     @Builder
     public ProfileDto(ProfileEntity p) {

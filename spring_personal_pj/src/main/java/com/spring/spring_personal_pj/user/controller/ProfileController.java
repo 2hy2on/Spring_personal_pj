@@ -1,6 +1,9 @@
 package com.spring.spring_personal_pj.user.controller;
 
+import com.fasterxml.jackson.databind.ser.Serializers.Base;
+import com.spring.spring_personal_pj.exception.base.BaseResponse;
 import com.spring.spring_personal_pj.user.dto.ProfileDto;
+import com.spring.spring_personal_pj.user.dto.ProfileImageDto;
 import com.spring.spring_personal_pj.user.entity.ProfileEntity;
 import com.spring.spring_personal_pj.user.service.ProfileService;
 import java.util.List;
@@ -18,40 +21,78 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProfileController {
 
+    //변수로 빼는게 좋음
+
+
+    //쿼리에 DTO 넣기 가능
+    //common 파일 만들기
+    //friend 따로 빼기
 
     @Autowired
     ProfileService profileService;
 
     //프로필 생성
     @PostMapping("/users/profiles")
-    public ProfileDto createProfile(@RequestBody ProfileDto profile){
-        return profileService.save(profile.getUserId(), profile);
+    @ResponseBody
+    BaseResponse<ProfileDto> addProfile(@RequestBody ProfileDto profile){
+        ProfileDto profileDto = profileService.save(profile.getUserId(), profile);
+        return BaseResponse.onSuccess(profileDto);
     }
 
     //프로필 부분 조회, 클릭 시 image가 current에 해당하는 이미지가 나와야함
-    @ResponseBody
+
     @GetMapping("/users/profiles/{profileId}")
-    public ProfileDto getProfile(@PathVariable("profileId") Long id){
-        System.out.println(profileService.getProfileById(id));
-        return profileService.getProfileById(id);
+    @ResponseBody
+    BaseResponse<ProfileDto> getProfile(@PathVariable("profileId") Long id){
+        ProfileDto profileDto = profileService.getProfileById(id);
+        return BaseResponse.onSuccess(profileDto);
     }
 
     //프로필 전체 조회
-    @ResponseBody
     @GetMapping("/users/profile-lists/{userId}")
-    public List<ProfileDto> getAllProfile(@PathVariable("userId") long userId){
-        return profileService.findAllByUserId(userId);
+    @ResponseBody
+    BaseResponse<List<ProfileDto>> getAllProfile(@PathVariable("userId") long userId){
+        List<ProfileDto> profileDto = profileService.findAllByUserId(userId);
+        return BaseResponse.onSuccess(profileDto);
    }
 
    //프로필 수정
-    @ResponseBody
-    @PatchMapping("/users/profiles/{profileId}")
-    public ProfileDto updateProfile(@PathVariable("profileId") Long profileId, @RequestBody ProfileDto profileDto){
-        return profileService.updateProfile(profileId, profileDto);
+   @PatchMapping("/users/profiles/{profileId}")
+   @ResponseBody
+   public BaseResponse<ProfileDto> updateProfile(@PathVariable("profileId") Long profileId, @RequestBody ProfileDto profileDto){
+        ProfileDto updateProfile = profileService.updateProfile(profileId, profileDto);
+        return BaseResponse.onSuccess(updateProfile);
     }
 
-    //프로필 삭제
-    //fk떄문에 delete안됨
+
+
+    //프로필 이미지 추가
+
+    @PostMapping("/users/profileImages")
+    @ResponseBody
+    public BaseResponse<ProfileImageDto> addProfileImg(@RequestBody ProfileImageDto profileImgDto){
+        ProfileImageDto profileImageDto = profileService.saveProfileImage(profileImgDto);
+        return BaseResponse.onSuccess(profileImageDto);
+    }
+    //프로필 이미지 삭제
+    @DeleteMapping("/users/profileImages/{profileImgId}")
+    @ResponseBody
+    public BaseResponse<String> removeProfileImg(@PathVariable("profileImgId") Long profileImgId){
+        return BaseResponse.onSuccess(profileService.removeProfileImg(profileImgId));
+       // return BaseResponse.onSuccess();
+    }
+
+    @PatchMapping("/users/profileImages/{profileImgId}")
+    @ResponseBody
+    public BaseResponse<ProfileImageDto> updateProfileImg(@PathVariable("profileImgId") Long profileImgId, @RequestBody ProfileImageDto profileImageDto){
+        ProfileImageDto profileDto = profileService.updateProfileImg(profileImgId, profileImageDto);
+        return BaseResponse.onSuccess(profileDto);
+
+    }
+
+
+
+    //fk떄문에 delete안됨, 프사 배경 삭제 후 삭제해야함
     @ResponseBody
     @DeleteMapping("/users/profiles/{profileId}")
     public void deleteProfile(@PathVariable("profileId") Long profileId){

@@ -5,6 +5,7 @@
 
 package com.spring.spring_personal_pj.user.entity;
 
+import com.spring.spring_personal_pj.chatroom.entity.ChatroomEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -86,17 +87,22 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     private List<FriendEntity> friendList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "friendUser")
+    private List<FriendEntity> friends = new ArrayList<>();
     @OneToMany(mappedBy = "user")
    // @JoinColumn(name = "user")
     private List<ProfileEntity> profiles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<ChatroomEntity> chatrooms = new ArrayList<>();
     @Builder
-    public UserEntity(String email, String phone, String name, String password, Date birth) {
+    public UserEntity(String email, String phone, String name, String password, Date birth, String id) {
         this.email = email;
         this.phone = phone;
         this.name = name;
         this.password = password;
         this.birth = birth;
+        this.id = id;
     }
 
 }
