@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="3b5f0bbb-7f87-4306-854e-d9bde2b352d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/controller/ProfileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/dto/NewPwDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/dto/ProfileDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/entity/ProfileEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/SpringPersonalPjApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/SpringPersonalPjApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/entity/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gradle/8.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/entity/BgImageEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_personal_pj/src/main/java/com/spring/spring_personal_pj/user/entity/BgImageEntity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,12 +36,13 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/20210/바탕 화면/Iheyon/2023/Study/Spring_personal_pj/Spring_personal_pj/spring_personal_pj/build.gradle&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

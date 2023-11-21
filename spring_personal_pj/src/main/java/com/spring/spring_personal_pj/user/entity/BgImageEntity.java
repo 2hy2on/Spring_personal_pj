@@ -10,13 +10,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Getter
 @Table(name = "bgimage")
+@NoArgsConstructor
 public class BgImageEntity {
 
     @Id
@@ -44,4 +47,11 @@ public class BgImageEntity {
     @JoinColumn(name = "profile_id")
     private ProfileEntity profile;
 
+    @Builder
+    public BgImageEntity(boolean isCurrent, boolean isHidden, String bgImage, ProfileEntity p){
+        this.isCurrent = isCurrent;
+        this.isHidden = isHidden;
+        this.bgImage = bgImage;
+        this.profile = p;
+    }
 }

@@ -39,7 +39,6 @@ public class UserController {
 
     //개인정보 조회
     @GetMapping("/users/{userId}")
-    @ResponseBody
     public BaseResponse<UserDto> getUser(@PathVariable("userId") Long userId) {
         UserDto user = service.getUserById(userId);
         return BaseResponse.onSuccess(user);
